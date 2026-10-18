@@ -119,4 +119,4 @@
 
 本项目采用 [MIT License](LICENSE)。
 
-Copyright (c) 2026 Zhang Yiran.
+Copyright (c) 2026 Shironeko.

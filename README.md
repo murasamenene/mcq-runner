@@ -155,4 +155,4 @@ Quiz state is kept in memory only. Refreshing the page clears the current attemp
 
 Released under the [MIT License](LICENSE).
 
-Copyright (c) 2026 Zhang Yiran.
+Copyright (c) 2026 Shironeko.
