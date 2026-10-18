@@ -13,6 +13,7 @@ The interface is currently in Simplified Chinese.
   - `immediate` — show the answer and explanation after each question.
   - `afterAll` — hide answers until every question has been answered.
 - Previous/next navigation with selections preserved while reviewing.
+- A running `HH:MM:SS` timer beside the bank title, plus an optional per-bank time limit that turns the timer red once exceeded.
 - Tightly controlled navigation: submitted answers cannot be changed in `immediate` mode, while `afterAll` mode allows answers to be revised until the final result is requested.
 - Final results split into **Wrong Answers & Explanations** and **Correct Answer Explanations**.
 - Detailed question-bank validation with explicit error messages.
@@ -53,6 +54,12 @@ If `reviewMode` is omitted, it defaults to `immediate` for compatibility with ea
 - The **查看结果** button remains disabled until all questions have a selection.
 - All questions are graded together when results are requested.
 
+## Timer and time limit
+
+The timer starts when a question bank has loaded successfully and is shown next to the bank title in `HH:MM:SS` format. It resets when retrying or loading another bank, and stops when the results screen is shown.
+
+Set the optional top-level `timeLimit` field to a duration in `HH:MM:SS` format (for example, `"00:30:00"`). When set, the limit is displayed beside the timer. Once elapsed time exceeds the limit, the timer turns red. Leave the field empty or omit it for no limit.
+
 ## Question bank format
 
 A question bank is a single UTF-8 JSON file. Questions are presented in array order.
@@ -61,6 +68,7 @@ A question bank is a single UTF-8 JSON file. Questions are presented in array or
 {
   "title": "Web Basics",
   "reviewMode": "immediate",
+  "timeLimit": "00:30:00",
   "questions": [
     {
       "question": "Which file extension is used for HTML documents?",
@@ -84,6 +92,7 @@ A question bank is a single UTF-8 JSON file. Questions are presented in array or
 | --- | --- | --- |
 | `title` | No | Bank name shown in the quiz and results screens. If omitted or empty, the file name without `.json` is used. Must be a string. |
 | `reviewMode` | No | `"immediate"` or `"afterAll"`. Defaults to `"immediate"`. |
+| `timeLimit` | No | Optional elapsed-time limit in `HH:MM:SS` format, for example `"00:30:00"`. Empty or omitted means no limit. When set, it is displayed beside the timer. |
 | `questions` | Yes | Non-empty array of question objects. |
 | `questions[].question` | Yes | Non-empty question text. Newlines are supported. |
 | `questions[].options` | Yes | Array of 2–26 non-empty strings. |
@@ -117,6 +126,7 @@ The entire file is validated before the quiz starts. Invalid banks remain on the
 - a non-object root;
 - a missing, non-array, or empty `questions` array;
 - a `reviewMode` other than `"immediate"` or `"afterAll"`;
+- an invalid `timeLimit` value (it must use `HH:MM:SS` format);
 - empty question or option text;
 - option counts outside 2–26;
 - malformed, out-of-range, or duplicate answer letters;
@@ -137,8 +147,8 @@ Save banks as UTF-8 to avoid garbled Chinese text. In Windows Notepad, choose UT
 | --- | --- |
 | `index.html` | Application entry point. Open this file to start. |
 | `styles.css` | Minimal retro tkinter-style styling. |
-| `app.js` | Bank loading, validation, quiz state, navigation, grading, and results. |
-| `example-bank.json` | Ready-to-use example bank using `immediate` mode. |
+| `app.js` | Bank loading, validation, quiz state, navigation, timing, grading, and results. |
+| `example-bank.json` | Ready-to-use example bank using `immediate` mode and a 30-minute limit. |
 | `README.md` | English documentation. |
 | `README.zh-CN.md` | Simplified Chinese documentation. |
 | `LICENSE` | MIT license. |

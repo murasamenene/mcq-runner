@@ -27,7 +27,11 @@
 
     <section class="screen" id="quiz-screen" aria-label="答题" hidden>
       <div class="status-row">
-        <span class="bank-title" id="bank-title"></span>
+        <div class="bank-meta">
+          <span class="bank-title" id="bank-title"></span>
+          <span class="timer" id="timer" role="timer" aria-label="答题用时 00:00:00">00:00:00</span>
+          <span class="time-limit" id="time-limit" hidden></span>
+        </div>
         <span class="progress" id="progress"></span>
         <span class="score" id="score"></span>
       </div>

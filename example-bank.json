@@ -1,6 +1,7 @@
 {
   "title": "计算机基础示例题库",
   "reviewMode": "immediate",
+  "timeLimit": "00:30:00",
   "questions": [
     {
       "question": "HTML 的主要用途是什么？",

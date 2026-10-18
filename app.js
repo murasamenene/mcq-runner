@@ -15,6 +15,8 @@
     fileDisplay: document.getElementById('file-display'),
     startError: document.getElementById('start-error'),
     bankTitle: document.getElementById('bank-title'),
+    timer: document.getElementById('timer'),
+    timeLimit: document.getElementById('time-limit'),
     progress: document.getElementById('progress'),
     score: document.getElementById('score'),
     questionType: document.getElementById('question-type'),
@@ -42,8 +44,11 @@
     currentIndex: 0,
     selections: [],
     results: [],
-    correctCount: 0
+    correctCount: 0,
+    timerStartedAt: 0
   };
+
+  var timerIntervalId = null;
 
   function BankError(message) {
     this.name = 'BankError';
@@ -73,17 +78,20 @@
   }
 
   function showStartScreen() {
+    stopQuizTimer();
     state.bank = null;
     state.fileName = '';
     state.currentIndex = 0;
     state.selections = [];
     state.results = [];
     state.correctCount = 0;
+    state.timerStartedAt = 0;
 
     dom.fileDisplay.textContent = '未选择题库文件';
     dom.bankFileInput.value = '';
     dom.finishButton.hidden = true;
     dom.finishButton.disabled = true;
+    resetTimerDisplay();
     clearError();
     showScreen('start');
     setStatus('就绪');
@@ -110,6 +118,8 @@
       }
       reviewMode = raw.reviewMode;
     }
+
+    var timeLimitSeconds = normalizeTimeLimit(raw.timeLimit);
 
     if (!Array.isArray(raw.questions) || raw.questions.length === 0) {
       throw new BankError('题库必须包含一个非空的 questions 数组。');
@@ -162,8 +172,36 @@
     return {
       title: title || fallbackTitle(fileName),
       reviewMode: reviewMode,
+      timeLimitSeconds: timeLimitSeconds,
       questions: questions
     };
+  }
+
+  function normalizeTimeLimit(rawTimeLimit) {
+    if (rawTimeLimit === undefined || rawTimeLimit === null) {
+      return null;
+    }
+
+    if (typeof rawTimeLimit !== 'string') {
+      throw new BankError('题库的 timeLimit（时间限制）必须使用 "时:分:秒" 格式的字符串。');
+    }
+
+    var text = rawTimeLimit.trim();
+    if (!text) {
+      return null;
+    }
+
+    var match = /^(\d+):([0-5]\d):([0-5]\d)$/.exec(text);
+    if (!match) {
+      throw new BankError('题库的 timeLimit（时间限制）必须使用 "时:分:秒" 格式，例如 "00:30:00"。');
+    }
+
+    var seconds = Number(match[1]) * 3600 + Number(match[2]) * 60 + Number(match[3]);
+    if (!Number.isSafeInteger(seconds)) {
+      throw new BankError('题库的 timeLimit（时间限制）数值过大。');
+    }
+
+    return seconds;
   }
 
   function normalizeAnswer(rawAnswer, optionCount, label) {
@@ -253,6 +291,64 @@
     });
   }
 
+  function formatDuration(totalSeconds) {
+    var seconds = Math.max(0, Math.floor(totalSeconds));
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
+    var remainder = seconds % 60;
+
+    return String(hours).padStart(2, '0') + ':' +
+      String(minutes).padStart(2, '0') + ':' +
+      String(remainder).padStart(2, '0');
+  }
+
+  function updateTimer() {
+    if (!state.bank || state.timerStartedAt === 0) {
+      return;
+    }
+
+    var elapsedSeconds = Math.max(0, Math.floor((Date.now() - state.timerStartedAt) / 1000));
+    var isOverLimit = state.bank.timeLimitSeconds !== null &&
+      elapsedSeconds > state.bank.timeLimitSeconds;
+    var display = formatDuration(elapsedSeconds);
+
+    dom.timer.textContent = display;
+    dom.timer.classList.toggle('is-over-limit', isOverLimit);
+    dom.timer.setAttribute(
+      'aria-label',
+      '答题用时 ' + display + (isOverLimit ? '，已超过时间限制' : '')
+    );
+  }
+
+  function stopQuizTimer() {
+    if (timerIntervalId !== null) {
+      window.clearInterval(timerIntervalId);
+      timerIntervalId = null;
+    }
+  }
+
+  function resetTimerDisplay() {
+    dom.timer.textContent = '00:00:00';
+    dom.timer.classList.remove('is-over-limit');
+    dom.timer.setAttribute('aria-label', '答题用时 00:00:00');
+    dom.timeLimit.textContent = '';
+    dom.timeLimit.hidden = true;
+  }
+
+  function startQuizTimer(bank) {
+    stopQuizTimer();
+    state.timerStartedAt = Date.now();
+    resetTimerDisplay();
+
+    if (bank.timeLimitSeconds !== null) {
+      dom.timeLimit.textContent = '时间限制：' + formatDuration(bank.timeLimitSeconds);
+      dom.timeLimit.hidden = false;
+    }
+
+    updateTimer();
+    timerIntervalId = window.setInterval(updateTimer, 1000);
+  }
+
   function beginQuiz(bank, fileName) {
     state.bank = bank;
     state.fileName = fileName;
@@ -265,6 +361,7 @@
     });
     state.correctCount = 0;
 
+    startQuizTimer(bank);
     showScreen('quiz');
     renderQuestion();
   }
@@ -673,6 +770,7 @@
     var percentage = Math.round((state.correctCount / total) * 100);
     var modeLabel = isAfterAllMode() ? '全部答完查看答案' : '逐题查看答案';
 
+    stopQuizTimer();
     showScreen('result');
 
     dom.resultBank.textContent = bank.title;

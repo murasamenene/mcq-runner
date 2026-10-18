@@ -154,11 +154,37 @@ input {
   font-size: 13px;
 }
 
+.bank-meta {
+  display: flex;
+  flex: 1 1 260px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  min-width: 0;
+}
+
 .bank-title {
-  flex: 1 1 180px;
   min-width: 0;
   font-weight: 700;
   overflow-wrap: anywhere;
+}
+
+.timer {
+  color: var(--tk-ink);
+  font-family: Consolas, "Courier New", monospace;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.timer.is-over-limit {
+  color: var(--tk-wrong);
+  font-weight: 700;
+}
+
+.time-limit {
+  color: var(--tk-muted);
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .progress,
@@ -427,5 +453,9 @@ input {
 
   .status-row {
     gap: 2px 12px;
+  }
+
+  .bank-meta {
+    flex-basis: 100%;
   }
 }
