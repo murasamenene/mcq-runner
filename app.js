@@ -768,14 +768,13 @@
     var bank = state.bank;
     var total = bank.questions.length;
     var percentage = Math.round((state.correctCount / total) * 100);
-    var modeLabel = isAfterAllMode() ? '全部答完查看答案' : '逐题查看答案';
 
     stopQuizTimer();
     showScreen('result');
 
     dom.resultBank.textContent = bank.title;
     dom.resultScore.textContent = '答对 ' + state.correctCount + ' / ' + total + ' 题';
-    dom.resultDetail.textContent = '正确率 ' + percentage + '%。答题模式：' + modeLabel + '。';
+    dom.resultDetail.textContent = '正确率 ' + percentage + '%。';
     renderReviewLists();
 
     setStatus('答题结束：答对 ' + state.correctCount + ' / ' + total + ' 题。');
