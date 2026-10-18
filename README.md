@@ -17,12 +17,10 @@ The interface is currently in Simplified Chinese.
 - Final results split into **Wrong Answers & Explanations** and **Correct Answer Explanations**.
 - Detailed question-bank validation with explicit error messages.
 - Minimal, retro, tkinter-inspired visual design with no external assets or fonts.
-- Keyboard-accessible native radio buttons, checkboxes, and buttons.
-- Responsive layout down to narrow mobile viewports.
 
 ## Quick start
 
-1. Open `index.html` directly in a modern browser such as Edge, Chrome, or Firefox.
+1. Open `index.html` directly in a browser.
 2. Click **选择题库…** ("Choose question bank").
 3. Select `example-bank.json` or your own UTF-8 JSON bank.
 4. Answer the questions according to the bank's review mode.
@@ -147,7 +145,7 @@ Save banks as UTF-8 to avoid garbled Chinese text. In Windows Notepad, choose UT
 
 ## Browser support
 
-Modern Edge, Chrome, and Firefox releases are supported. The app works when opened directly from disk (`file://`) and reads question banks only after the user selects them. There are no external dependencies, CDNs, or network requests.
+Modern browsers are supported. The app works when opened directly from disk (`file://`) and reads question banks only after the user selects them. There are no external dependencies, CDNs, or network requests.
 
 Quiz state is kept in memory only. Refreshing the page clears the current attempt.
 
