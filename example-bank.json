@@ -1,0 +1,72 @@
+{
+  "title": "计算机基础示例题库",
+  "reviewMode": "immediate",
+  "questions": [
+    {
+      "question": "HTML 的主要用途是什么？",
+      "options": [
+        "描述网页的结构和内容",
+        "管理关系型数据库",
+        "编译操作系统内核",
+        "绘制三维动画模型"
+      ],
+      "answer": "A",
+      "explanation": "HTML（超文本标记语言）用于描述网页的结构和内容。"
+    },
+    {
+      "question": "HTTP 状态码 404 表示什么？",
+      "options": [
+        "请求成功",
+        "资源未找到",
+        "服务器内部错误",
+        "需要身份验证"
+      ],
+      "answer": "B",
+      "explanation": "404 Not Found 表示服务器无法找到请求的资源。"
+    },
+    {
+      "question": "以下哪些属于版本控制系统？",
+      "options": [
+        "Git",
+        "SVN",
+        "HTTP",
+        "Mercurial"
+      ],
+      "answer": ["A", "B", "D"],
+      "explanation": "Git、SVN 和 Mercurial 都是版本控制系统；HTTP 是网络传输协议。"
+    },
+    {
+      "question": "在 JavaScript 中，表达式 2 + '2' 的结果是什么？",
+      "options": [
+        "数字 4",
+        "字符串 “22”",
+        "NaN",
+        "抛出错误"
+      ],
+      "answer": "B",
+      "explanation": "加号遇到字符串时执行字符串拼接，因此结果是字符串 “22”。"
+    },
+    {
+      "question": "CSS 中用于设置文字颜色的属性是哪一个？",
+      "options": [
+        "background-color",
+        "font-size",
+        "color",
+        "border-color"
+      ],
+      "answer": "C",
+      "explanation": "color 属性用于设置元素中文字的颜色。"
+    },
+    {
+      "question": "下列哪些是关系型数据库？",
+      "options": [
+        "MySQL",
+        "PostgreSQL",
+        "MongoDB",
+        "SQLite"
+      ],
+      "answer": ["A", "B", "D"],
+      "explanation": "MySQL、PostgreSQL 和 SQLite 是关系型数据库；MongoDB 是文档型数据库。"
+    }
+  ]
+}

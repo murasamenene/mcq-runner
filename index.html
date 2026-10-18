@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>选择题答题器</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app" aria-labelledby="app-title">
+    <header class="app-header">
+      <h1 id="app-title">选择题答题器</h1>
+    </header>
+
+    <section class="screen" id="start-screen" aria-labelledby="start-title">
+      <h2 class="screen-title" id="start-title">加载题库</h2>
+      <p class="hint">选择题库文件（JSON）后立即开始答题。</p>
+      <div class="file-row">
+        <p class="file-display" id="file-display">未选择题库文件</p>
+        <button class="tk-button" id="choose-bank" type="button">选择题库…</button>
+        <input id="bank-file" type="file" accept=".json,application/json" hidden>
+      </div>
+      <p class="error" id="start-error" role="alert" hidden></p>
+      <p class="hint start-note">题库格式见 README.md。题目只在当前浏览器本地读取。</p>
+    </section>
+
+    <section class="screen" id="quiz-screen" aria-label="答题" hidden>
+      <div class="status-row">
+        <span class="bank-title" id="bank-title"></span>
+        <span class="progress" id="progress"></span>
+        <span class="score" id="score"></span>
+      </div>
+
+      <div class="question-panel">
+        <p class="question-type" id="question-type"></p>
+        <p class="question-text" id="question-text" tabindex="-1"></p>
+        <fieldset class="options">
+          <legend class="visually-hidden" id="options-legend">选项</legend>
+          <div class="options-list" id="options-list"></div>
+        </fieldset>
+      </div>
+
+      <div class="feedback" id="feedback" aria-live="polite" hidden></div>
+
+      <div class="action-row">
+        <button class="tk-button action-prev" id="prev-button" type="button" disabled>上一题</button>
+        <button class="tk-button" id="action-button" type="button" disabled>提交答案</button>
+        <button class="tk-button" id="finish-button" type="button" hidden disabled>查看结果</button>
+      </div>
+    </section>
+
+    <section class="screen" id="result-screen" aria-labelledby="result-title" hidden>
+      <h2 class="screen-title" id="result-title" tabindex="-1">答题结束</h2>
+
+      <div class="result-panel">
+        <p class="result-bank" id="result-bank"></p>
+        <p class="result-score" id="result-score"></p>
+        <p class="result-detail" id="result-detail"></p>
+      </div>
+
+      <h3 class="section-title">错题与解析</h3>
+      <div class="review-list" id="wrong-list"></div>
+
+      <h3 class="section-title">正确题目解析</h3>
+      <div class="review-list" id="correct-list"></div>
+
+      <div class="action-row">
+        <button class="tk-button" id="retry-button" type="button">重新答题</button>
+        <button class="tk-button" id="change-bank-button" type="button">选择题库</button>
+      </div>
+    </section>
+
+    <footer class="statusbar">
+      <span id="statusbar-text">就绪</span>
+    </footer>
+  </main>
+</body>
+</html>
