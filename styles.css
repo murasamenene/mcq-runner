@@ -28,14 +28,14 @@ html {
 
 body {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
   margin: 0;
+  padding: 32px 16px;
   background: var(--tk-bg);
   color: var(--tk-ink);
   font-family: "Segoe UI", "Microsoft YaHei", Tahoma, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 button,
@@ -44,30 +44,30 @@ input {
 }
 
 .app {
-  width: min(720px, calc(100% - 24px));
-  margin: 24px auto;
-  padding: 12px;
+  width: min(880px, 100%);
+  margin: auto;
+  padding: 20px 22px;
   border: 2px solid;
   border-color: var(--tk-light) var(--tk-dark) var(--tk-dark) var(--tk-light);
   background: var(--tk-bg);
 }
 
 .app-header {
-  margin: 0 0 12px;
-  padding: 0 0 8px;
+  margin: 0 0 16px;
+  padding: 0 0 10px;
   border-bottom: 1px solid var(--tk-line);
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1.4;
 }
 
 .screen-title {
-  margin: 0 0 10px;
-  font-size: 15px;
+  margin: 0 0 12px;
+  font-size: 19px;
   font-weight: 700;
   line-height: 1.4;
 }
@@ -78,29 +78,29 @@ input {
 }
 
 .hint {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   color: var(--tk-muted);
   overflow-wrap: anywhere;
 }
 
 .start-note {
-  margin: 16px 0 0;
-  padding-top: 8px;
+  margin: 20px 0 0;
+  padding-top: 10px;
   border-top: 1px solid var(--tk-line);
 }
 
 .file-row {
   display: flex;
   align-items: stretch;
-  gap: 6px;
-  margin: 10px 0;
+  gap: 8px;
+  margin: 12px 0;
 }
 
 .file-display {
   flex: 1 1 260px;
   min-width: 0;
   margin: 0;
-  padding: 3px 6px;
+  padding: 6px 9px;
   background: var(--tk-field);
   border: 2px solid;
   border-color: var(--tk-dark) var(--tk-light) var(--tk-light) var(--tk-dark);
@@ -108,23 +108,25 @@ input {
 }
 
 .error {
-  margin: 10px 0;
-  padding: 6px 8px;
+  margin: 12px 0;
+  padding: 9px 11px;
   background: var(--tk-field);
   border: 2px solid;
   border-color: var(--tk-dark) var(--tk-light) var(--tk-light) var(--tk-dark);
   color: var(--tk-wrong);
+  font-size: 15px;
   overflow-wrap: anywhere;
 }
 
 .tk-button {
   appearance: none;
-  min-height: 28px;
-  padding: 2px 14px;
+  min-height: 36px;
+  padding: 4px 18px;
   background: var(--tk-bg);
   color: var(--tk-ink);
   border: 2px solid;
   border-color: var(--tk-light) var(--tk-dark) var(--tk-dark) var(--tk-light);
+  font-size: 15px;
   line-height: 1.5;
   cursor: pointer;
 }
@@ -147,11 +149,11 @@ input {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 4px 14px;
-  margin: 0 0 12px;
-  padding: 0 0 7px;
+  gap: 6px 16px;
+  margin: 0 0 16px;
+  padding: 0 0 10px;
   border-bottom: 1px solid var(--tk-line);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .bank-meta {
@@ -159,12 +161,13 @@ input {
   flex: 1 1 260px;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 2px 10px;
+  gap: 4px 12px;
   min-width: 0;
 }
 
 .bank-title {
   min-width: 0;
+  font-size: 15px;
   font-weight: 700;
   overflow-wrap: anywhere;
 }
@@ -172,6 +175,7 @@ input {
 .timer {
   color: var(--tk-ink);
   font-family: Consolas, "Courier New", monospace;
+  font-size: 15px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -183,31 +187,34 @@ input {
 
 .time-limit {
   color: var(--tk-muted);
-  font-size: 12px;
+  font-size: 13px;
   white-space: nowrap;
 }
 
 .progress,
 .score {
+  font-size: 14px;
   white-space: nowrap;
 }
 
 .question-panel {
-  padding: 10px 12px 12px;
+  padding: 16px 18px 18px;
   background: var(--tk-panel);
   border: 2px solid;
   border-color: var(--tk-dark) var(--tk-light) var(--tk-light) var(--tk-dark);
 }
 
 .question-type {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--tk-muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .question-text {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
+  font-size: 17px;
   font-weight: 600;
+  line-height: 1.6;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
@@ -222,14 +229,14 @@ input {
 .options-list {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .option {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  padding: 2px 4px;
+  gap: 10px;
+  padding: 4px 6px;
   cursor: pointer;
 }
 
@@ -244,9 +251,9 @@ input {
 
 .option input {
   flex: 0 0 auto;
-  width: 14px;
-  height: 14px;
-  margin: 4px 0 0;
+  width: 16px;
+  height: 16px;
+  margin: 5px 0 0;
   accent-color: #333333;
   cursor: pointer;
 }
@@ -275,13 +282,13 @@ input {
 
 .option-note {
   font-weight: 400;
-  font-size: 12px;
+  font-size: 13px;
   color: inherit;
 }
 
 .feedback {
-  margin: 12px 0 0;
-  padding: 8px 10px;
+  margin: 16px 0 0;
+  padding: 12px 14px;
   background: var(--tk-panel);
   border-top: 1px solid var(--tk-line);
   border-bottom: 1px solid var(--tk-line);
@@ -296,7 +303,7 @@ input {
 }
 
 .feedback p {
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   overflow-wrap: anywhere;
 }
 
@@ -322,8 +329,8 @@ input {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 18px;
 }
 
 .action-prev {
@@ -331,34 +338,37 @@ input {
 }
 
 .result-panel {
-  padding: 10px 12px;
+  padding: 16px 18px;
   background: var(--tk-panel);
   border: 2px solid;
   border-color: var(--tk-dark) var(--tk-light) var(--tk-light) var(--tk-dark);
 }
 
 .result-bank {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
+  font-size: 17px;
   font-weight: 700;
   overflow-wrap: anywhere;
 }
 
 .result-score {
   margin: 0;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 700;
+  line-height: 1.4;
 }
 
 .result-detail {
-  margin: 2px 0 0;
+  margin: 4px 0 0;
   color: var(--tk-muted);
+  font-size: 15px;
 }
 
 .section-title {
-  margin: 16px 0 0;
-  padding-top: 8px;
+  margin: 22px 0 0;
+  padding-top: 10px;
   border-top: 1px solid var(--tk-line);
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 700;
 }
 
@@ -367,12 +377,13 @@ input {
 }
 
 .empty-note {
-  margin: 4px 0;
+  margin: 6px 0;
   color: var(--tk-muted);
+  font-size: 15px;
 }
 
 .review-item {
-  padding: 8px 0;
+  padding: 12px 0;
 }
 
 .review-item + .review-item {
@@ -380,7 +391,8 @@ input {
 }
 
 .review-question {
-  margin: 0 0 3px;
+  margin: 0 0 4px;
+  font-size: 16px;
   font-weight: 600;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -389,6 +401,8 @@ input {
 .review-answer,
 .review-explanation {
   margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
   overflow-wrap: anywhere;
   white-space: pre-wrap;
 }
@@ -399,11 +413,11 @@ input {
 
 .statusbar {
   min-height: 20px;
-  margin-top: 14px;
-  padding-top: 6px;
+  margin-top: 18px;
+  padding-top: 8px;
   border-top: 1px solid var(--tk-line);
   color: var(--tk-muted);
-  font-size: 12px;
+  font-size: 13px;
   overflow-wrap: anywhere;
 }
 
@@ -419,12 +433,16 @@ input {
   border: 0;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
+  body {
+    padding: 0;
+  }
+
   .app {
     width: 100%;
     min-height: 100vh;
     margin: 0;
-    padding: 10px;
+    padding: 14px;
     border-right: 0;
     border-left: 0;
   }
@@ -439,12 +457,12 @@ input {
 
   .file-row .tk-button {
     width: 100%;
-    min-height: 32px;
+    min-height: 42px;
   }
 
   .action-row .tk-button {
     flex: 1 1 auto;
-    min-height: 32px;
+    min-height: 42px;
   }
 
   .action-prev {
@@ -457,5 +475,14 @@ input {
 
   .bank-meta {
     flex-basis: 100%;
+  }
+
+  .question-panel,
+  .result-panel {
+    padding: 14px;
+  }
+
+  .result-score {
+    font-size: 22px;
   }
 }

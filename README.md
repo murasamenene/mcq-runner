@@ -56,7 +56,7 @@ If `reviewMode` is omitted, it defaults to `immediate` for compatibility with ea
 
 ## Timer and time limit
 
-The timer starts when a question bank has loaded successfully and is shown next to the bank title in `HH:MM:SS` format. It resets when retrying or loading another bank, and stops when the results screen is shown.
+The timer starts when a question bank has loaded successfully and is shown next to the bank title in `HH:MM:SS` format. It resets when retrying or loading another bank, and stops when the results screen is shown. The results summary shows the final elapsed time and, when configured, the time limit.
 
 Set the optional top-level `timeLimit` field to a duration in `HH:MM:SS` format (for example, `"00:30:00"`). When set, the limit is displayed beside the timer. Once elapsed time exceeds the limit, the timer turns red. Leave the field empty or omit it for no limit.
 
@@ -107,7 +107,6 @@ Unknown fields are ignored.
 - A string `answer` produces radio buttons and is graded as single-answer.
 - An array `answer` produces checkboxes and is graded as multiple-answer, even when the array contains only one letter.
 - Multiple-answer questions require an exact set match; there is no partial credit.
-- The final percentage is rounded to the nearest integer.
 
 ## Results
 
@@ -117,6 +116,8 @@ Both modes end with the same two result sections:
 - **正确题目解析** (Correct Answer Explanations): question, the correct answer, and the explanation.
 
 If one group is empty, the results screen says **无错题。** ("No wrong answers.") or **无正确题目。** ("No correct answers."). If a question has no explanation, the screen shows **解析：题库未提供解析。** ("Explanation: no explanation was provided.").
+
+The result summary also shows **用时** (elapsed time) and, when the bank defines a `timeLimit`, **限时** (the configured limit).
 
 ## Validation
 

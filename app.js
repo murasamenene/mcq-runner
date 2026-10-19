@@ -302,12 +302,44 @@
       String(remainder).padStart(2, '0');
   }
 
+  function quizElapsedSeconds() {
+    if (!state.bank || state.timerStartedAt === 0) {
+      return 0;
+    }
+
+    return Math.max(0, Math.floor((Date.now() - state.timerStartedAt) / 1000));
+  }
+
+  function formatPercentage(correctCount, total) {
+    if (total === 0 || correctCount === 0) {
+      return '0';
+    }
+
+    if (correctCount === total) {
+      return '100';
+    }
+
+    var rounded = Math.round((correctCount / total) * 1000) / 10;
+
+    // Do not let a non-perfect score round up to 100%, or a non-zero
+    // score display as 0%.
+    if (rounded >= 100) {
+      return '99.9';
+    }
+
+    if (rounded === 0) {
+      return '<0.1';
+    }
+
+    return String(rounded);
+  }
+
   function updateTimer() {
     if (!state.bank || state.timerStartedAt === 0) {
       return;
     }
 
-    var elapsedSeconds = Math.max(0, Math.floor((Date.now() - state.timerStartedAt) / 1000));
+    var elapsedSeconds = quizElapsedSeconds();
     var isOverLimit = state.bank.timeLimitSeconds !== null &&
       elapsedSeconds > state.bank.timeLimitSeconds;
     var display = formatDuration(elapsedSeconds);
@@ -767,14 +799,20 @@
   function renderResults() {
     var bank = state.bank;
     var total = bank.questions.length;
-    var percentage = Math.round((state.correctCount / total) * 100);
+    var elapsedSeconds = quizElapsedSeconds();
 
     stopQuizTimer();
     showScreen('result');
 
     dom.resultBank.textContent = bank.title;
     dom.resultScore.textContent = '答对 ' + state.correctCount + ' / ' + total + ' 题';
-    dom.resultDetail.textContent = '正确率 ' + percentage + '%。';
+
+    var detail = '正确率 ' + formatPercentage(state.correctCount, total) + '%；' +
+      '用时 ' + formatDuration(elapsedSeconds);
+    if (bank.timeLimitSeconds !== null) {
+      detail += ' / 限时 ' + formatDuration(bank.timeLimitSeconds);
+    }
+    dom.resultDetail.textContent = detail + '。';
     renderReviewLists();
 
     setStatus('答题结束：答对 ' + state.correctCount + ' / ' + total + ' 题。');
